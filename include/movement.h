@@ -2,7 +2,7 @@
 
 namespace Movement
 {
-	void setup() {}
+	void setup();
 
-	void loop() {}
+	void loop();
 } // namespace Movement
