@@ -1,7 +1,7 @@
-#pragma once
-
+#include <movement.h>
 #include <secrets.h>
 #include <Arduino.h>
+#include <telnet.h>
 #include <config.h>
 #include <net.h>
 
@@ -21,6 +21,7 @@ namespace Movement
 
 	void notify_movement()
 	{
+		LOGN("Notifying of movement");
 		char *path = (char *)malloc(sizeof(char) * 40);
 		sprintf(path, "/movement/%s", NAME);
 		Net::req_auth(BASE_NAME, 80, path);
