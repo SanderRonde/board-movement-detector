@@ -1,16 +1,19 @@
 #include <ArduinoOTA.h>
+#include <movement.h>
 #include <Arduino.h>
 #include <config.h>
 #include <telnet.h>
 #include <ota.h>
 #include <net.h>
+#include <string.h>
 
-void setup() {
+void setup()
+{
 	Serial.begin(115200);
 	Serial.println("Booting");
 
 	// Setup telnet
-	Telnet::setup(NAME);
+	Telnet::setup((String("movement-detector-") + NAME).c_str());
 
 	// Setup OTA and wait
 	OTA::setup();
@@ -19,15 +22,15 @@ void setup() {
 	LOGN("Stopped waiting");
 
 	// Setup the rest
-	// TODO:
+	Movement::setup();
 
 	// Done
 	LOGN("Booted");
 }
 
-void loop() {
+void loop()
+{
 	OTA::loop();
 	Telnet::loop();
-	
-	//TODO:
+	Movement::loop();
 }

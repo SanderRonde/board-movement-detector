@@ -1,3 +1,4 @@
 #pragma once
 
-#define NAME "TODO:"
+#define NAME "door"
+#define MOVEMENT_PIN D1
