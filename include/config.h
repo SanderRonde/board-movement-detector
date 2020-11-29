@@ -1,4 +1,4 @@
 #pragma once
 
-#define NAME "door"
-#define MOVEMENT_PIN D1
+#define NAME "room-door"
+#define IN_PIN A0
