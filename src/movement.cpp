@@ -10,14 +10,6 @@
 
 namespace Movement
 {
-	void notify_movement()
-	{
-		char *path = (char *)malloc(sizeof(char) * 40);
-		sprintf(path, "/movement/%s", NAME);
-		Net::req_auth(BASE_NAME, 80, path);
-		free(path);
-	}
-
 	void setup()
 	{
 		pinMode(IN_PIN, INPUT_PULLUP);
