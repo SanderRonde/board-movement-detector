@@ -1,6 +1,6 @@
 # Arduino board movement detector
 
-This repo contains the code for an arduino board that detects movement and reports it to a server. It works by using a `RCWL-0516` doppler radar motion sensor to detect any movement.
+This repo contains the code for an arduino board that detects movement and reports it to a server. It works by using an infrared radar motion sensor to detect any movement.
 
 This project uses [PlatformIO](https://platformio.org/) for simple uploading and interfacing with the board itself.
 
