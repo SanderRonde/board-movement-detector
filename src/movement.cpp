@@ -5,15 +5,20 @@
 #include <config.h>
 #include <net.h>
 
-#define COOLDOWN_PERIOD 1000 * 10
-#define PING_TIME 100
+#define MOVEMENT_TIME 50
+#define MOVEMENT_MIN 600
+#define COOLDOWN_TIME 1000 * 1.5
 
 namespace Movement
 {
 	void setup()
 	{
+#ifndef DIGITAL
 		pinMode(IN_PIN, INPUT_PULLUP);
 		digitalWrite(IN_PIN, HIGH);
+#else
+		pinMode(IN_PIN, INPUT);
+#endif
 	}
 
 	void send_movement()
@@ -24,26 +29,43 @@ namespace Movement
 		free(path);
 	}
 
-	bool is_movement(int movement_read)
+	bool is_movement()
 	{
-		return movement_read > 600;
+#ifdef DIGITAL
+		return digitalRead(IN_PIN) == HIGH;
+#else
+		return analogRead(IN_PIN) > MOVEMENT_MIN;
+#endif
 	}
 
-	unsigned int last_run = millis();
-	unsigned int last_log = millis();
+	bool has_been_off = true;
+	unsigned long last_log = millis();
+	unsigned long movement_since = 0;
 	void loop()
 	{
-		if (millis() - last_run >= PING_TIME)
+		bool movement = is_movement();
+		if (movement)
 		{
-			last_run = millis();
-
-			int movement_read = analogRead(IN_PIN);
-			if (is_movement(movement_read) && millis() - last_log >= COOLDOWN_PERIOD)
+			if (has_been_off && millis() - last_log >= COOLDOWN_TIME)
 			{
-				LOGF("Logging movement %s - %d\n", NAME, movement_read);
-				send_movement();
-				last_log = millis();
+				if (movement_since != 0 && millis() - movement_since >= MOVEMENT_TIME)
+				{
+					send_movement();
+					LOGN("Detected movement");
+					has_been_off = false;
+					last_log = millis();
+					movement_since = 0;
+				}
+				else if (movement_since == 0)
+				{
+					movement_since = millis();
+				}
 			}
+		}
+		else
+		{
+			has_been_off = true;
+			movement_since = 0;
 		}
 	}
 } // namespace Movement
