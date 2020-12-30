@@ -1,6 +1,6 @@
 # Arduino board movement detector
 
-This repo contains the code for an arduino board that detects movement and reports it to a server. It works by using an infrared radar motion sensor to detect any movement.
+This repo contains the code for an arduino board that detects movement and reports it to a server. It works by using an infrared radar motion sensor to detect any movement. Since this project is built to accomodate a bunch of different types of sensors (proximity-only, human-specific, long-range), there are a bunch of different configurations.
 
 This project uses [PlatformIO](https://platformio.org/) for simple uploading and interfacing with the board itself.
 
