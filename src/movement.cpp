@@ -48,18 +48,22 @@ namespace Movement
 		{
 			if (has_been_off && millis() - last_log >= COOLDOWN_TIME)
 			{
+#ifndef ABSOLUTE_READ
 				if (movement_since != 0 && millis() - movement_since >= MOVEMENT_TIME)
 				{
+#endif
 					send_movement();
 					LOGN("Detected movement");
 					has_been_off = false;
 					last_log = millis();
+#ifndef ABSOLUTE_READ
 					movement_since = 0;
 				}
 				else if (movement_since == 0)
 				{
 					movement_since = millis();
 				}
+#endif
 			}
 		}
 		else
@@ -67,5 +71,5 @@ namespace Movement
 			has_been_off = true;
 			movement_since = 0;
 		}
-	}
+	} // namespace Movement
 } // namespace Movement

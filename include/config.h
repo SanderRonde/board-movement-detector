@@ -1,8 +1,9 @@
 #pragma once
 
 #define DIGITAL 1
+#define ABSOLUTE_READ 1
 
-#define NAME "mirror"
+#define NAME "door"
 #ifdef DIGITAL
 #define IN_PIN D1
 #else
