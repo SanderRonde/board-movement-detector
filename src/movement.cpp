@@ -5,9 +5,9 @@
 #include <config.h>
 #include <net.h>
 
-#define MOVEMENT_TIME 50
+#define MOVEMENT_TIME 100
 #define MOVEMENT_MIN 600
-#define COOLDOWN_TIME 1000 * 1.5
+#define COOLDOWN_TIME 1000 * 3
 
 namespace Movement
 {
