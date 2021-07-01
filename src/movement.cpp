@@ -9,7 +9,7 @@
 #define COOLDOWN_TIME 1000
 #define MEASUREMENT_COOLDOWN 50
 
-#define LOGGING_MODE 1
+#define LOGGING_MODE
 
 namespace Movement
 {
@@ -67,8 +67,10 @@ namespace Movement
 				if (movement_since != 0 && millis() - movement_since >= MOVEMENT_TIME)
 				{
 #endif
+					#ifndef LOGGING_MODE
 					send_movement();
 					LOGN("Detected movement");
+					#endif
 					has_been_off = false;
 					last_log = millis();
 #ifndef ABSOLUTE_READ
