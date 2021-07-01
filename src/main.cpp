@@ -1,32 +1,17 @@
-#include <ArduinoOTA.h>
-#include <movement.h>
-#include <Arduino.h>
-#include <config.h>
-#include <telnet.h>
-#include <ota.h>
-#include <net.h>
-#include <string.h>
+#include "lib-includes.h"
+#include "lib-telnet.h"
+#include "movement.h"
+#include "lib-main.h"
+#include "lib-ota.h"
+#include "secrets.h"
+#include "string.h"
+#include "config.h"
 
 void setup()
 {
-	Serial.begin(115200);
-	Serial.println("Booting");
-
-	// Setup telnet
-	Telnet::setup((String("movement-detector-") + NAME).c_str());
-
-	// Setup OTA and wait
-	OTA::setup();
-	LOGF("Reset reason = %s - %s\n", ESP.getResetReason().c_str());
-	LOGN("Booted. Waiting for possible OTAs");
-	OTA::wait_for_otas();
-	LOGN("Stopped waiting");
-
-	// Setup the rest
+	Main::connect((String("movement-detector-") + NAME).c_str(), OTA_PW, WIFI_SSID, WIFI_PW);
 	Movement::setup();
-
-	// Done
-	LOGN("Booted");
+	Main::connect_done();
 }
 
 void loop()
