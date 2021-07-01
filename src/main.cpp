@@ -17,6 +17,7 @@ void setup()
 
 	// Setup OTA and wait
 	OTA::setup();
+	LOGF("Reset reason = %s - %s\n", ESP.getResetReason().c_str());
 	LOGN("Booted. Waiting for possible OTAs");
 	OTA::wait_for_otas();
 	LOGN("Stopped waiting");
