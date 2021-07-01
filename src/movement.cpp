@@ -9,7 +9,7 @@
 #define COOLDOWN_TIME 1000
 #define MEASUREMENT_COOLDOWN 50
 
-#define LOGGING_MODE
+// #define LOGGING_MODE
 
 namespace Movement
 {
