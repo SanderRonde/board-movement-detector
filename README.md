@@ -12,7 +12,7 @@ PCB source file (in format of [EasyEda](https://easyeda.com)) can be found at `p
 
 It takes an ESP8266 devkit board (can be either the wide or narrower one), a simple screw terminal and a `US-016` ultrasonic movement sensor
 
-![PCB](./pcb//board.png)
+![PCB](./pcb/board.png)
 
 ## License
 
